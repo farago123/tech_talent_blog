@@ -6,9 +6,8 @@
 </p>
 
 <div class="panel-body">
-  by <strong><%= @blog_post.user.email %></strong> 
+  by <strong><%= link_to @blog_post.user.username, user_posts_path(id: @blog_post.user.id) %></strong>
 </div>
-
 <p>
   <strong>Blog entry:</strong>
   <%= @blog_post.blog_entry %>
@@ -18,7 +17,15 @@
   <strong>Last updated:</strong>
   <%= @blog_post.updated_at.to_formatted_s(:long_ordinal) %>
 </p>
-<%= link_to 'Edit', edit_blog_post_path(@blog_post) %>
+
+<% if current_user.id == @blog_post.user.id %> 
+  <div class="panel-footer">
+    <p>
+      <%= link_to 'Edit', edit_blog_post_path(@blog_post) %>
+    </p>  
+  </div>  
+<% end %>
+
 <%= render 'comments/form' %>
 <div class="panel panel-default">
   <div class="panel-header">
@@ -28,7 +35,7 @@
   <% @blog_post.comments.each do |comment| %>
     <div class="panel panel-success">
       <div class="panel-body">
-        <p><strong><%= comment.user.email %></strong> said:</p>
+        <p><strong><%= link_to comment.user.username, user_posts_path(id: comment.user.id) %></strong> said:</p>
         <p><%= comment.comment_entry %></p>
         <p><%= comment.updated_at.to_formatted_s(:long_ordinal) %></p>
       </div>  

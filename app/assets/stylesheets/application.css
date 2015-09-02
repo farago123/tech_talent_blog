@@ -18,9 +18,21 @@
 }
 
 body { margin-left: 10px !important;
-       background-color: rgba(255, 100, 0, .3) !important;
+       background-color: rgba(50,200,255,.5) !important;
 }
 
-#signOut {margin-right: 0px;
-          margin-top: 10px;
+nav { margin-right: 10px; 
+      margin-top: 10px;
+}
+
+#signOut {
+          color: white;
+}
+#editProfile {
+    color: black;
+    margin-right: 5px;
+}
+
+#signOut,#editProfile:hover{
+    color: black;
 }

@@ -10,19 +10,17 @@
             <%= link_to blog_post.title, blog_post_path(blog_post) %>
           </div>
           <div class="panel-body">
-            by <%= blog_post.user.email %>
+            by <strong><%= link_to blog_post.user.username, user_posts_path(id: blog_post.user.id) %></strong>
             <p><%= blog_post.blog_entry[0..250] %></p>
             <%= link_to 'Read more', blog_post_path(blog_post) %>
           </div>
-          <div class="panel-footer">
-            <%= link_to 'Edit', edit_blog_post_path(blog_post), class: "btn btn-warning" %>
-            <%= link_to 'Destroy', blog_post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-          </div>
+          <% if current_user.id == blog_post.user.id %>
+            <div class="panel-footer">
+              <%= link_to 'Edit', edit_blog_post_path(blog_post), class: "btn btn-warning" %>
+              <%= link_to 'Destroy', blog_post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+            </div>
+          <% end %>
         </div>
       </div>  
     <% end %>
 </div>
-
-
-
-<%= link_to 'New Blog post', new_blog_post_path %>
